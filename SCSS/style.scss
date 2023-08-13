@@ -1,0 +1,100 @@
+@mixin flexible($dis , $direction , $just , $align ) {
+    display: $dis;
+    flex-direction: $direction;
+    justify-content: $just;
+    align-items: $align;
+}
+
+@mixin fuentes($size , $weight , $color) {
+    font-size: $size;
+    font-weight: $weight;
+    color: $color ;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+@mixin buttons($radius, $color, $padding, $margin, $border) {
+    border-radius: $radius;
+    background-color: $color;
+    padding: $padding;
+    margin: $margin;
+    border: $border;
+}
+/*@mixin responsive($medida : 510px){
+    @media screen and (max-width: $medida ){
+        @content;
+    }
+}*/
+body {
+    height: 100%;
+    background-image: url("../images/fondo.jpeg");
+    //background-repeat: no-repeat;
+    background-size: cover;
+    @include flexible(flex, column, flex-start, center);        
+    /*@media (min-height: 100vh) {        
+            height: 100%;                    
+      }*/
+}
+
+main {
+    width: 70vw;
+    //Cuando la pantalla es mas grande del 90vh, permite crecer de tamaño el elemento
+    min-height: 90vh;    
+    @include buttons(25px, rgba(153, 151, 151, 0.726), 5px, 15px, 1px solid white);
+    @include flexible(flex, column, flex-start, center);
+    box-shadow: 1px 1px 10px 5px#bebebe;
+}
+
+button {
+    @include fuentes(18px, normal, white);
+    @include buttons(10px, blue, 5px, 5px, 1px solid darkblue);
+
+    &:hover {
+        cursor: pointer;
+        @include buttons(10px, darkblue, 5px, 5px, 1px solid white);
+    }
+}
+
+span {
+    @include fuentes(22px, 600, black)
+}
+
+
+input {
+    @include fuentes(18px, normal, black);
+    @include buttons(10px, rgba(255, 255, 255, 0.596), 5px, 5px, 1px solid rgb(92, 91, 91));
+
+    &:hover {
+        cursor: text;
+        @include buttons(10px, rgba(255, 255, 255, 0.596), 5px, 5px, 1px solid rgb(51, 51, 51));
+    }
+}
+.section-{                    
+    &buttons{
+        @include buttons(0px,transparent, 0px, 25px 0px,none);
+        @include flexible(flex,row ,space-around , flex-start );        
+        flex-wrap: wrap;
+        button{
+            @include fuentes(20px,bold ,white )
+        }
+    }
+    &options{
+        @include buttons(0px,transparent, 5px, 5px 5px,none);
+        button {
+            @include fuentes(18px, normal, white);
+            @include buttons(10px, rgb(29, 168, 87), 5px, 5px, 1px solid rgb(3, 134, 62));
+        
+            &:hover {
+                cursor: pointer;
+                @include buttons(10px,  rgb(3, 134, 62), 5px, 5px, 1px solid  rgb(29, 168, 87));
+            }
+        }
+        
+    }
+    &results{
+        @include buttons(0px,transparent, 5px, 5px 5px,none);
+        span{
+            @include fuentes(20px, normal, black);
+            @include buttons(0px,transparent, 5px, 10px 5px,none);
+        }
+    }
+}
